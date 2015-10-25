@@ -1,6 +1,7 @@
 defmodule Board do
   defstruct board: [], next: 0
 
+
   def start_board do
     "xxxxxxxxxx" <>
     "xxxxxxxxxx" <>
@@ -14,14 +15,7 @@ defmodule Board do
     "xRNBQKBNRx" <>
     "xxxxxxxxxx" <>
     "xxxxxxxxxx"
-  end
-
-  def pos_to_row(pos), do: 10 - div(pos, 10)
-
-  def field_to_pos(field) do
-    col = 'A' - String.uppercase(String.at(field, 0))
-    row = '1' - String.at(field, 1)
-    (9 - row) * 10 + col
+    |> BoardUtils.ascii_to_board
   end
 
   def moves(board, player) do
@@ -37,8 +31,6 @@ defmodule Board do
 
   def moves(board, player, piece, true, pos) do
   end
-
-
 
   def is_player(c, 0), do: String.contains?("RNBQKP", c)
   def is_player(c, 1), do: String.contains?("rnbqkp", c)
